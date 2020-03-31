@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="assets/awsm.min.css">
+    <link rel="stylesheet" href="assets/index.css">
+    <title>Bangunin</title>
+</head>
+
+<body>
+    <header>
+        <h1>Bangunin</h1>
+        <p>{{.ServerTime}}</p>
+    </header>
+    <main>
+        <article>
+            <section>
+                <p>
+                    <a href="https://github.com/p4kl0nc4t/bangunin">Bangunin</a> is a Go-based web app which functions
+                    as a
+                    <strong>call-based alarm</strong>.
+                    It means that it will "wake you up" by using phone calls.
+                </p>
+            </section>
+            <section>
+                <form action="/set" method="POST">
+                    <h3>Set your alarm</h4>
+                        <p>
+                            Your alarm will be set once.
+                            Please adjust it with server's timezone.
+                            Once set, it can't be unset.
+                            A phone number have a maximum of 3 alarms set.
+                        </p>
+                        <label>Phone number:</label>
+                        <input pattern="^\+\d+$" type="tel" name="phone_number" placeholder="+628537232823" required>
+                        <label>Time:</label>
+                        <input type="time" name="time" required>
+                        <label>Number of calls:</label>
+                        <input type="number" name="noc" min="1" value="1" max="10" required>
+                        <button type="submit" id="btnSubmit">Submit</button>
+                </form>
+            </section>
+            <section>
+                <h3><a href="#alarms" id="alarms"></a>Alarms</h4>
+                    <p>Below is a table containing a list of alarms set.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Phone number</th>
+                                <th>Time</th>
+                                <th>Number of calls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{ if .Alarms }}
+                            {{range $i, $v := .Alarms}}
+                            <tr>
+                                <td>{{$v.PhoneNumber}}</td>
+                                <td>{{$v.Time}}</td>
+                                <td>{{$v.NumberOfCalls}}</td>
+                            </tr>
+                            {{end}}
+                            {{else}}
+                            <tr>
+                                <td colspan="3">Nothing to display here.</td>
+                            </tr>
+                            {{end}}
+                        </tbody>
+                    </table>
+            </section>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; loncat 2020</p>
+    </footer>
+    </div>
+    <div id="msg" style="display:none;">{{if .Message}}{{.Message}}{{end}}</div>
+    <script>
+        var msg = document.getElementById("msg").innerText;
+        if (msg) {
+            window.history.replaceState({}, document.title, "/");
+            alert(msg);
+        }
+    </script>
+</body>
+
+</html>
