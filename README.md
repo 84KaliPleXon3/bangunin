@@ -6,7 +6,7 @@ Here is a list of what I have learnt throughout this project.
 2. Using `net/http` to send an HTTP request (POST, GET).
 3. Using `regexp` to scrape csrf tokens.
 4. Using `time` to schedule the call.
-5. Using goroutines
+5. Using goroutines.
 
 Here is my issues while doing this project.
 1. Error handling (I don't know how to properly handle errors, I wrote the same code all the time).
